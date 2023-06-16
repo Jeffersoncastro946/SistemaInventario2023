@@ -8,7 +8,8 @@ import java.util.List;
 import sistemainventario.*;
 
 public class CostoPEPS extends Producto {
-
+private double CostoVenta;
+private double utilidad;
     public CostoPEPS() {
 
     }
@@ -52,17 +53,27 @@ public class CostoPEPS extends Producto {
             factura--;
         }
         //System.out.println("Costo PEPS: " + costoPePs);
+        this.CostoVenta=costoPePs; //me sirve para calcular utilidadn3
         return costoPePs;
     }
 
     @Override
-    protected double costoExistencia() {
+    public double costoExistencia() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    protected double utilidad() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public double utilidad() {
+    //utilidad es costo de todo las facturas - costo de venta
+    
+    
+    double totalFactura=0;//almacenara los costos de cada factura 
+   
+        for (Ventas factura : getMisVentas()) {
+            totalFactura+=factura.getCostoFactura();
+        }
+        this.utilidad=totalFactura;
+    return totalFactura-this.CostoVenta;
     }
 
 }

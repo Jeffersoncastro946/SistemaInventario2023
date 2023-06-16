@@ -29,8 +29,10 @@ public class SistemaInventario {
         P1.setMisVentas(v2);
         P1.setMisVentas(v3);
         
-        Double cv = P1.costoVenta();
+        double cv = P1.costoVenta();
+        double u=P1.utilidad();
         System.out.println(cv);
+       System.out.println(u);
     }
 
 }

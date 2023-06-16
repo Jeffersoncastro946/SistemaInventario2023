@@ -28,9 +28,9 @@ public abstract class Producto {
     }
     //bloque de metodos
     //calcular costo de venta eso sera implementado dependiendo el tipo de costeo
-    protected abstract double costoVenta();
-    protected abstract double costoExistencia();
-    protected abstract  double utilidad(); 
+    public abstract double costoVenta();
+    public abstract double costoExistencia();
+    public abstract  double utilidad(); 
      
 
     public String getCodigoArticulo() {

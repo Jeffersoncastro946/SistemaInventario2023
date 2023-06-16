@@ -42,7 +42,9 @@ public class Ventas {
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-
+    public double getCostoFactura(){
+        return this.cantidad*this.precio;
+    }
     @Override
     public String toString() {
         return "Ventas{" + "NumeroFactura=" + NumeroFactura + ", cantidad=" + cantidad + ", precio=" + precio + '}';
