@@ -1,15 +1,22 @@
 package sistemainventario;
 
+import javax.swing.JTextField;
+
 public class Compras {
     //atributos
 
     private int numeroDeCompra;
     private int cantidad;
-    private float costo;
+    private double costo;
 
     //contructores
     public Compras() { //para cuando cree el produto pueda tener un stock vacio de compras
 
+    }
+    public Compras(JTextField Ncompra, JTextField cantidad, JTextField costo) { //
+        this.numeroDeCompra=Integer.parseInt(Ncompra.getText());
+        this.cantidad=Integer.parseInt(cantidad.getText());
+        this.costo=Double.parseDouble(costo.getText());
     }
 
     public Compras(int nCompras, float costo, int cantidad) { //para cuando cree el produto pueda tener un stock 
@@ -35,7 +42,7 @@ public class Compras {
         this.cantidad = cantidad;
     }
 
-    public float getCosto() {
+    public double getCosto() {
         return costo;
     }
 
@@ -51,6 +58,7 @@ public class Compras {
         this.cantidad-=cant;
         return cant*this.costo;
     }
+    
     @Override
     public String toString() {
         return "Compras{" + "numeroDeCompra=" + numeroDeCompra + ", cantidad=" + cantidad + ", costo=" + costo + '}';

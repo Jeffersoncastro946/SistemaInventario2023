@@ -1,5 +1,7 @@
 package sistemainventario;
 
+import javax.swing.JTextField;
+
 public class Ventas {
 //atributos
 
@@ -16,6 +18,12 @@ public class Ventas {
         this.NumeroFactura = factura;
         this.cantidad = cantidad;
         this.precio = precio;
+    }
+    //
+    public Ventas(JTextField factura, JTextField cantidad, JTextField precio) {
+        this.NumeroFactura = factura.getText();
+        this.cantidad = Integer.parseInt(cantidad.getText());
+        this.precio = Integer.parseInt(precio.getText());
     }
 //getters y setters
 

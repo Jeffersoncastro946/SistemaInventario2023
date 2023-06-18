@@ -21,18 +21,22 @@ public class SistemaInventario {
         Ventas v2 = new Ventas("946", 20, 15);
         Ventas v3 = new Ventas("947", 20, 16);
         
-        CostoPEPS P1 = new CostoPEPS("01", "SAL", c1, v1);
+        CostoPEPS P1 = new CostoPEPS("01", "SAL", c1);
         P1.setMisCompras(c2);
         P1.setMisCompras(c3);
         P1.setMisCompras(c4);
         P1.setMisCompras(c5);
-        P1.setMisVentas(v2);
-        P1.setMisVentas(v3);
+        System.out.println(P1);
+       // P1.setMisVentas(v2);
+        //P1.setMisVentas(v3);
         
-        double cv = P1.costoVenta();
-        double u=P1.utilidad();
-        System.out.println(cv);
+       double cv = P1.costoVenta();
+       System.out.println(cv);
+     /*   double u=P1.utilidad();
+        double cE=P1.costoExistencia();
+        
        System.out.println(u);
+        System.out.println(cE);*/
     }
 
 }

@@ -2,6 +2,7 @@ package sistemainventario;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JTextField;
 
 public abstract class Producto {
 //atributos
@@ -24,6 +25,34 @@ public abstract class Producto {
         this.nombreArticulo = nombre;
         this.misCompras.add(entrada);
         this.misVentas.add(salidad);
+
+    }
+  
+      public Producto(String codigo, String nombre, Compras entrada) {
+        /*Este contructor recibira dos objectos ya armados para agregarlos a una lista de compra y venta
+        el armado puede ser desde los txt el apartado para registrar la compra y venta*/
+        this.codigoArticulo = codigo;
+        this.nombreArticulo = nombre;
+        this.misCompras.add(entrada);
+       // this.misVentas.add(salidad);
+
+    }
+      public Producto(JTextField codigo, JTextField nombre, Compras entrada, Ventas salidad) {
+        /*Este contructor recibira dos objectos ya armados para agregarlos a una lista de compra y venta
+        el armado puede ser desde los txt el apartado para registrar la compra y venta*/
+        this.codigoArticulo = codigo.getText();
+        this.nombreArticulo = nombre.getText();
+        this.misCompras.add(entrada);
+        this.misVentas.add(salidad);
+
+    }
+       public Producto(JTextField codigo, JTextField nombre, Compras entrada) {
+        /*Este contructor recibira dos objectos ya armados para agregarlos a una lista de compra y venta
+        el armado puede ser desde los txt el apartado para registrar la compra y venta*/
+        this.codigoArticulo = codigo.getText();
+        this.nombreArticulo = nombre.getText();
+        this.misCompras.add(entrada);
+       // this.misVentas.add(salidad);
 
     }
     //bloque de metodos
@@ -52,7 +81,8 @@ public abstract class Producto {
     public List<Compras> getMisCompras() { //devuelve una lista de compras
         return misCompras;
     }
-
+   
+        
     public void setMisCompras(Compras entrada) {//recibe un objecto de compra y almacena en la lista
         this.misCompras.add(entrada);
     }
