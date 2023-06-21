@@ -4,9 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Universidad_Java">
             <file>file:/D:/Workspace/SistemaInventario1/SistemaInventario/src/sistemainventario/SistemaInventario.java</file>
-            <file>file:/D:/Workspace/SistemaInventario1/SistemaInventario/src/sistemainventario/Compras.java</file>
             <file>file:/D:/Workspace/SistemaInventario1/SistemaInventario/src/sistemainventario/Formularios/Almacen.java</file>
+            <file>file:/D:/Workspace/SistemaInventario1/SistemaInventario/src/sistemainventario/costos/CostoUEPS.java</file>
             <file>file:/D:/Workspace/SistemaInventario1/SistemaInventario/src/sistemainventario/costos/CostoPEPS.java</file>
+            <file>file:/D:/Workspace/SistemaInventario1/SistemaInventario/src/sistemainventario/Producto.java</file>
         </group>
     </open-files>
 </project-private>

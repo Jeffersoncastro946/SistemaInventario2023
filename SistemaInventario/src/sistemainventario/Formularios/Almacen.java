@@ -6,7 +6,6 @@ package sistemainventario.Formularios;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import sistemainventario.*;
 import sistemainventario.costos.CostoPEPS;
@@ -24,19 +23,46 @@ public class Almacen extends javax.swing.JFrame {
     //  List MyListProduct = new ArrayList();
     List<CostoPEPS> costop = new ArrayList<>();
     int i = 0;
-    int j = 0;
+    int j = 0; //mostraremos los datos interados de cantidad y costo del primer datatable
     int k = 0;
     DefaultTableModel stock = new DefaultTableModel();
-
+    DefaultTableModel facturas = new DefaultTableModel();
+    DefaultTableModel Costeo = new DefaultTableModel();
+    
     public Almacen() {
-
+        
         initComponents();
-        // BtnFactura.setEnabled(false);
+        // aqui inicialiaza las columnas para stock table
         stock.addColumn("Codigo");
         stock.addColumn("Nombre");
         stock.addColumn("Cantidad");
         stock.addColumn("Costo");
         tablastock.setModel(stock);
+        //aqui inicializa las columnas para factura
+        facturas.addColumn("Numero de factura");
+        facturas.addColumn("Cantidad");
+        facturas.addColumn("Costo");
+        tableFacturas.setModel(facturas);
+        //aqui iniciliaza la columnas para mostrar datos de costeo
+        Costeo.addColumn("Costo Venta");
+        Costeo.addColumn("Utilidad");
+        Costeo.addColumn("Costo Existencia");
+        tableDatos.setModel(Costeo);
+        //bloquear todos los componentes del area de stock menos los botones almacenar y facturar 
+        txtCodigo.setEnabled(false);
+        txtNombreProducto.setEnabled(false);
+        txtNcompra.setEnabled(false);
+        txtCantidadEntrada.setEnabled(false);
+        txtCostoEntrada.setEnabled(false);
+        txtCodigo.setEnabled(false);
+        txtCodigo.setEnabled(false);
+        BtnGuardarProdcuto.setEnabled(false);
+        //bloquear todos los componentes del area de facturar menos los botones almacenar y facturar 
+        txtFactura.setEnabled(false);
+        txtcantidafactura.setEnabled(false);
+        txtcostoFactura.setEnabled(false);
+        BtnFactura.setEnabled(false);
+        BtnBloquearStock.setEnabled(false);
     }
 
     /**
@@ -61,25 +87,26 @@ public class Almacen extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtCostoEntrada = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        BtnNuevoProducto = new javax.swing.JButton();
-        BtnNuevo = new javax.swing.JButton();
-        BtnFactura = new javax.swing.JButton();
-        BtnAgregarStock = new javax.swing.JButton();
         BtnGuardarProdcuto = new javax.swing.JButton();
+        BtnFactura = new javax.swing.JButton();
+        BtnBloquearStock = new javax.swing.JButton();
+        BtnCostear = new javax.swing.JButton();
+        BtnBloquearFactura = new javax.swing.JButton();
+        BtnSalvar = new javax.swing.JButton();
+        BtnSalvar1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableStock = new javax.swing.JTable();
-        txtNombreProducto1 = new javax.swing.JTextField();
-        txtCantidadEntrada1 = new javax.swing.JTextField();
+        tableFacturas = new javax.swing.JTable();
+        txtcantidafactura = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtNcompra1 = new javax.swing.JTextField();
+        txtFactura = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtCostoEntrada1 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txtCodigo1 = new javax.swing.JTextField();
+        txtcostoFactura = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablastock = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableDatos = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro de Stock");
@@ -102,17 +129,10 @@ public class Almacen extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, null, new java.awt.Color(204, 204, 204)));
 
-        BtnNuevoProducto.setText("Nuevo Pedido");
-        BtnNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
+        BtnGuardarProdcuto.setText("Agregar a stock");
+        BtnGuardarProdcuto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnNuevoProductoActionPerformed(evt);
-            }
-        });
-
-        BtnNuevo.setText("Nueva Entrada");
-        BtnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnNuevoActionPerformed(evt);
+                BtnGuardarProdcutoActionPerformed(evt);
             }
         });
 
@@ -123,19 +143,30 @@ public class Almacen extends javax.swing.JFrame {
             }
         });
 
-        BtnAgregarStock.setText("Agregar Existencia");
-        BtnAgregarStock.addActionListener(new java.awt.event.ActionListener() {
+        BtnBloquearStock.setText("Vender");
+        BtnBloquearStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAgregarStockActionPerformed(evt);
+                BtnBloquearStockActionPerformed(evt);
             }
         });
 
-        BtnGuardarProdcuto.setText("Guardar Producto");
-        BtnGuardarProdcuto.addActionListener(new java.awt.event.ActionListener() {
+        BtnCostear.setText("Costear");
+        BtnCostear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnGuardarProdcutoActionPerformed(evt);
+                BtnCostearActionPerformed(evt);
             }
         });
+
+        BtnBloquearFactura.setText("Almacenar");
+        BtnBloquearFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBloquearFacturaActionPerformed(evt);
+            }
+        });
+
+        BtnSalvar.setText("Guardar informacion");
+
+        BtnSalvar1.setText("Cargar informacion");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,37 +174,41 @@ public class Almacen extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(BtnGuardarProdcuto)
+                .addGap(18, 18, 18)
+                .addComponent(BtnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnGuardarProdcuto)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(BtnNuevoProducto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnAgregarStock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(60, 60, 60)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BtnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(406, Short.MAX_VALUE))
+                    .addComponent(BtnBloquearStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnCostear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnBloquearFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnSalvar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(BtnAgregarStock))
+                        .addComponent(BtnBloquearFactura)
+                        .addGap(12, 12, 12)
+                        .addComponent(BtnBloquearStock)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnCostear)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(BtnSalvar1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BtnGuardarProdcuto)
-                            .addComponent(BtnNuevo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnFactura)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnNuevoProducto)
-                .addContainerGap())
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(BtnFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                            .addComponent(BtnGuardarProdcuto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(26, 26, 26))
         );
 
-        tableStock.setModel(new javax.swing.table.DefaultTableModel(
+        tableFacturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -184,29 +219,19 @@ public class Almacen extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tableStock);
-
-        txtNombreProducto1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreProducto1ActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(tableFacturas);
 
         jLabel6.setText("No. factura");
 
         jLabel7.setText("Cantidad");
 
-        txtNcompra1.addActionListener(new java.awt.event.ActionListener() {
+        txtFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNcompra1ActionPerformed(evt);
+                txtFacturaActionPerformed(evt);
             }
         });
 
         jLabel8.setText("Costo");
-
-        jLabel9.setText("Código");
-
-        jLabel10.setText("Nombre");
 
         tablastock.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -221,14 +246,29 @@ public class Almacen extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablastock);
 
+        tableDatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tableDatos);
+
+        jLabel9.setText("Datos de inventario");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
@@ -237,53 +277,46 @@ public class Almacen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(47, 47, 47)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCantidadEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNcompra1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtcantidafactura, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(41, 41, 41)
-                                .addComponent(txtCostoEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtcostoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCantidadEntrada, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtNcompra)
+                                    .addComponent(txtCostoEntrada)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(62, 62, 62)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombreProducto)
+                                    .addComponent(txtCodigo))))
+                        .addGap(122, 122, 122)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel10))
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCodigo1)
-                            .addComponent(txtNombreProducto1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCantidadEntrada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(txtNcompra)
-                            .addComponent(txtCostoEntrada)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombreProducto)
-                            .addComponent(txtCodigo))))
-                .addGap(123, 123, 123)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator1)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -306,63 +339,41 @@ public class Almacen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(txtCantidadEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtCostoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCantidadEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCostoEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(txtCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(txtNombreProducto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(txtNcompra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(txtCantidadEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtcantidafactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(txtCostoEntrada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                            .addComponent(txtcostoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoProductoActionPerformed
-        //Limpiara todos los txt
-        txtCodigo.setText(null);
-        txtNombreProducto.setText(null);
-        txtNcompra.setText(null);
-        txtCantidadEntrada.setText(null);
-        txtCostoEntrada.setText(null);
-        txtCodigo.requestFocus();
-        txtCodigo.setEnabled(true);
-        txtNombreProducto.setEnabled(true);
-        //i++;//indica que avanzamos una posicion en la lista 
-        k++;
-    }//GEN-LAST:event_BtnNuevoProductoActionPerformed
-
-    private void BtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoActionPerformed
-
-
-    }//GEN-LAST:event_BtnNuevoActionPerformed
 
     private void txtNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProductoActionPerformed
         // TODO add your handling code here:
@@ -377,26 +388,18 @@ public class Almacen extends javax.swing.JFrame {
         //primero que id sea igual eso es agregacion
         //segundo que el id de la lista sea diferente al que crearemos
 
-        if(costop.isEmpty()){//retorna true si esta vacia 
+        //bloque a discutir 
+        if (costop.isEmpty()) {//retorna true si esta vacia 
             //si esta vacia crea el objecto en la pos que se le indica caso inical pos 0
-            Compras c1=new Compras(txtNcompra, txtCantidadEntrada, txtCostoEntrada);
+            Compras c1 = new Compras(txtNcompra, txtCantidadEntrada, txtCostoEntrada);
             costop.add(new CostoPEPS(txtCodigo, txtNombreProducto, c1));
-        }else{
-            if(k==i){ //valido que la pos de k no cambie k indica la pos del arreglo costop k solo cambia cuando le doy a nuevo pedido
-                //si son iguales es agregacion
-                //costop
-                costop.get(i).setMisCompras(new Compras(txtNcompra, txtCantidadEntrada, txtCostoEntrada));
-            }else{
-                
-                //es creacion en distinta posicion
-                Compras c2=new Compras(txtNcompra, txtCantidadEntrada, txtCostoEntrada);
-                costop.add( new CostoPEPS(txtCodigo, txtNombreProducto, c2));
-                
-                
-                
-            }
+        } else {
+            
+            costop.get(0).setMisCompras(new Compras(txtNcompra, txtCantidadEntrada, txtCostoEntrada));
+            
         }
-        
+        //fin de bloque
+
         System.out.println(costop);
         //System.out.println(costop.get(j++));
         txtCodigo.setEnabled(false);
@@ -408,55 +411,118 @@ public class Almacen extends javax.swing.JFrame {
 
         // stock.setRowCount(0);
         //este ciclo manda al datatbale
-     /*   for (CostoPEPS costop1 : costop) {
+        for (CostoPEPS costop1 : costop) {
             Object[] fila = {
                 costop1.getCodigoArticulo(),
                 costop1.getNombreArticulo(),
                 //solventar el problema de indice
                 costop1.getMisCompras().get(j).getCantidad(),
                 costop1.getMisCompras().get(j).getCosto()
-
-            };
             
+            };
+            //nota para agregar mas productos solo debo buscar la manera de accerder a cierto indice en costo.getMIscompras ya sea agregando el for 
+            //dentro de uno de los bloques de validacion
 
             stock.addRow(fila);
             j++; //next elemento de la lista mis compras
         }
-*/
+        BtnBloquearStock.setEnabled(true);//habilitar las ventas
 
     }//GEN-LAST:event_BtnGuardarProdcutoActionPerformed
 
     private void BtnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFacturaActionPerformed
+        
+        //aqui agregaremos a la lista del producto la nuea factura que entra
+        Ventas salida = new Ventas(txtFactura, txtcantidafactura, txtcostoFactura);
+        costop.get(0).setMisVentas(salida);
+        System.out.println(costop);
+        // System.out.println(costop.get(0).costoVenta());
+         for (CostoPEPS costop1 : costop) {
+            Object[] fila = {
+               
+                //solventar el problema de indice
+                costop1.getMisVentas().get(i).getNumeroFactura(),
+                costop1.getMisVentas().get(i).getCantidad(),
+                costop1.getMisVentas().get(i).getCostoFactura()
+            
+            };
+            //nota para agregar mas productos solo debo buscar la manera de accerder a cierto indice en costo.getMIscompras ya sea agregando el for 
+            //dentro de uno de los bloques de validacion
 
+            facturas.addRow(fila);
+            i++; //next elemento de la lista mis compras
+        }
+         txtFactura.setText(null);
+         txtcantidafactura.setText(null);
+         txtcostoFactura.setText(null);
     }//GEN-LAST:event_BtnFacturaActionPerformed
 
-    private void BtnAgregarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarStockActionPerformed
+    private void txtFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFacturaActionPerformed
         // TODO add your handling code here:
-        costop.get(i).setMisCompras(new Compras(txtNcompra, txtCantidadEntrada, txtCostoEntrada));
-        System.out.println(costop.get(i));
+    }//GEN-LAST:event_txtFacturaActionPerformed
 
-        stock.setRowCount(0);
-        for (CostoPEPS costop1 : costop) {
+    private void BtnBloquearFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBloquearFacturaActionPerformed
+        //habilitar la parte de almacenar
+        txtCodigo.setEnabled(true);
+        txtNombreProducto.setEnabled(true);
+        txtNcompra.setEnabled(true);
+        txtCantidadEntrada.setEnabled(true);
+        txtCostoEntrada.setEnabled(true);
+        txtCodigo.setEnabled(true);
+        txtCodigo.setEnabled(true);
+        BtnGuardarProdcuto.setEnabled(true);
+        BtnBloquearFactura.setEnabled(false);
+        //bloquear todos los componentes del area de facturar menos los botones almacenar y facturar 
+        txtFactura.setEnabled(false);
+        txtcantidafactura.setEnabled(false);
+        txtcostoFactura.setEnabled(false);
+        BtnFactura.setEnabled(false);
+        
+
+    }//GEN-LAST:event_BtnBloquearFacturaActionPerformed
+
+    private void BtnBloquearStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBloquearStockActionPerformed
+        // TODO add your handling code here:
+        txtNcompra.setEnabled(false);
+        txtCantidadEntrada.setEnabled(false);
+        txtCostoEntrada.setEnabled(false);
+        txtCodigo.setEnabled(false);
+        txtCodigo.setEnabled(false);
+        BtnGuardarProdcuto.setEnabled(false);
+        BtnFactura.setEnabled(true);
+        //habilitar almacenar
+        txtFactura.setEnabled(true);
+        txtcantidafactura.setEnabled(true);
+        txtcostoFactura.setEnabled(true);
+        BtnFactura.setEnabled(true);
+
+    }//GEN-LAST:event_BtnBloquearStockActionPerformed
+
+    private void BtnCostearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCostearActionPerformed
+        // TODO add your handling code here:
+      /*  System.out.print("EL costo venta es ");
+        System.out.println(costop.get(0).costoVenta());
+        System.out.print("EL costo existencia es ");
+        System.out.println(costop.get(0).costoExistencia());
+        System.out.print("la utilidad es ");
+        System.out.println(costop.get(0).utilidad());*/
+        //imprimire estas variables
+       double CV=costop.get(0).costoVenta();
+       double CE=costop.get(0).costoExistencia();
+       double Utl=costop.get(0).utilidad();
             Object[] fila = {
-                costop1.getCodigoArticulo(),
-                costop1.getNombreArticulo(),
-                costop1.getMisCompras().get(i).getCantidad(),
-                costop1.getMisCompras().get(i).getCosto()
+               CV,
+                CE,
+                Utl
+            
             };
-            stock.addRow(fila);
-        }
-        txtNcompra.setText(null);
-        txtCantidadEntrada.setText(null);
-        txtCostoEntrada.setText(null);
-    }//GEN-LAST:event_BtnAgregarStockActionPerformed
+            //nota para agregar mas productos solo debo buscar la manera de accerder a cierto indice en costo.getMIscompras ya sea agregando el for 
+            //dentro de uno de los bloques de validacion
 
-    private void txtNombreProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreProducto1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreProducto1ActionPerformed
-
-    private void txtNcompra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNcompra1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNcompra1ActionPerformed
+            Costeo.addRow(fila);
+          //  i++; //next elemento de la lista mis compras
+        
+    }//GEN-LAST:event_BtnCostearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -472,21 +538,21 @@ public class Almacen extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Almacen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(Almacen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(Almacen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Almacen.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -502,13 +568,14 @@ public class Almacen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnAgregarStock;
+    private javax.swing.JButton BtnBloquearFactura;
+    private javax.swing.JButton BtnBloquearStock;
+    private javax.swing.JButton BtnCostear;
     private javax.swing.JButton BtnFactura;
     private javax.swing.JButton BtnGuardarProdcuto;
-    private javax.swing.JButton BtnNuevo;
-    private javax.swing.JButton BtnNuevoProducto;
+    private javax.swing.JButton BtnSalvar;
+    private javax.swing.JButton BtnSalvar1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -520,19 +587,19 @@ public class Almacen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable tablastock;
-    private javax.swing.JTable tableStock;
+    private javax.swing.JTable tableDatos;
+    private javax.swing.JTable tableFacturas;
     private javax.swing.JTextField txtCantidadEntrada;
-    private javax.swing.JTextField txtCantidadEntrada1;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtCodigo1;
     private javax.swing.JTextField txtCostoEntrada;
-    private javax.swing.JTextField txtCostoEntrada1;
+    private javax.swing.JTextField txtFactura;
     private javax.swing.JTextField txtNcompra;
-    private javax.swing.JTextField txtNcompra1;
     private javax.swing.JTextField txtNombreProducto;
-    private javax.swing.JTextField txtNombreProducto1;
+    private javax.swing.JTextField txtcantidafactura;
+    private javax.swing.JTextField txtcostoFactura;
     // End of variables declaration//GEN-END:variables
 }
